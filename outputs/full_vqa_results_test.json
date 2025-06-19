@@ -1,0 +1,881 @@
+[
+    {
+        "scenario": "20230707_8_SN46_T1",
+        "perspective": "overhead_view",
+        "results": [
+            {
+                "perspective": "overhead",
+                "question": "What is the orientation of the pedestrian's body?",
+                "choices": {
+                    "a": "Same direction as the vehicle",
+                    "b": "Diagonally to the left, in the opposite direction to the vehicle",
+                    "c": "Perpendicular to the vehicle and to the right",
+                    "d": "Diagonally to the right, in the same direction as the vehicle"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the position of the pedestrian relative to the vehicle?",
+                "choices": {
+                    "a": "On the left, behind the vehicle",
+                    "b": "On the left of the vehicle",
+                    "c": "Diagonally to the right, in front of the vehicle",
+                    "d": "Behind the vehicle"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is relative distance of pedestrian from vehicle?",
+                "choices": {
+                    "a": "Close",
+                    "b": "Near",
+                    "c": "Far",
+                    "d": "Very far"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's line of sight?",
+                "choices": {
+                    "a": "Crossing destination",
+                    "b": "Road surface",
+                    "c": "Vehicle",
+                    "d": "In front, in the direction of travel"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's awareness regarding vehicle?",
+                "choices": {
+                    "a": "Unaware of the vehicle",
+                    "b": "Notices the vehicle",
+                    "c": "Almost noticed"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's action?",
+                "choices": {
+                    "a": "About to cross",
+                    "b": "Crossing",
+                    "c": "Standing still",
+                    "d": "About to stand still"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the fine-grained action taken by the pedestrian?",
+                "choices": {
+                    "a": "Crossing immediately in front of or behind a parked vehicle",
+                    "b": "Falling backwards",
+                    "c": "About to cross the street ignoring the signal",
+                    "d": "Rushing out"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is pedestrian's speed?",
+                "choices": {
+                    "a": "Slowly",
+                    "b": "At high speed",
+                    "c": "Extremely slower",
+                    "d": "At a slightly higher speed"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the orientation of the pedestrian's body?",
+                "choices": {
+                    "a": "Perpendicular to the vehicle and to the right",
+                    "b": "Diagonally to the right, in the opposite direction to the vehicle",
+                    "c": "Diagonally to the left, in the opposite direction to the vehicle",
+                    "d": "Diagonally to the right, in the same direction as the vehicle"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the position of the pedestrian relative to the vehicle?",
+                "choices": {
+                    "a": "On the right, behind the vehicle",
+                    "b": "On the left of the vehicle",
+                    "c": "On the right of the vehicle",
+                    "d": "Diagonally to the left in front of the vehicle"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is relative distance of pedestrian from vehicle?",
+                "choices": {
+                    "a": "Near",
+                    "b": "Close",
+                    "c": "Far",
+                    "d": "Very far"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's direction of travel?",
+                "choices": {
+                    "a": "To the left",
+                    "b": "Diagonally in front, to the right",
+                    "c": "Diagonally backward and to the left",
+                    "d": "To the right"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's awareness regarding vehicle?",
+                "choices": {
+                    "a": "Cannot be determined",
+                    "b": "Unaware of the vehicle",
+                    "c": "Notices the vehicle"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's action?",
+                "choices": {
+                    "a": "Standing still",
+                    "b": "Squatting",
+                    "c": "About to stand still",
+                    "d": "Going straight ahead"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the fine-grained action taken by the pedestrian?",
+                "choices": {
+                    "a": "traveling in a car lane",
+                    "b": "Crossing near but not on a pedestrian crossing",
+                    "c": "Crossing immediately in front of or behind a moving vehicle",
+                    "d": "Rushing out"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is pedestrian's speed?",
+                "choices": {
+                    "a": "Slowly",
+                    "b": "At a slightly higher speed",
+                    "c": "At high speed",
+                    "d": "Extremely slower"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the orientation of the pedestrian's body?",
+                "choices": {
+                    "a": "Diagonally to the right, in the same direction as the vehicle",
+                    "b": "Same direction as the vehicle",
+                    "c": "Perpendicular to the vehicle and to the right",
+                    "d": "Diagonally to the right, in the opposite direction to the vehicle"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the position of the pedestrian relative to the vehicle?",
+                "choices": {
+                    "a": "On the left of the vehicle",
+                    "b": "Diagonally to the left in front of the vehicle",
+                    "c": "Behind the vehicle",
+                    "d": "On the left, behind the vehicle"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is relative distance of pedestrian from vehicle?",
+                "choices": {
+                    "a": "Very far",
+                    "b": "Far",
+                    "c": "Near",
+                    "d": "Close"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's direction of travel?",
+                "choices": {
+                    "a": "To the left",
+                    "b": "Diagonally to the front and to the left",
+                    "c": "In front",
+                    "d": "Backward"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's awareness regarding vehicle?",
+                "choices": {
+                    "a": "Cannot be determined",
+                    "b": "Unaware of the vehicle",
+                    "c": "Notices the vehicle"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the fine-grained action taken by the pedestrian?",
+                "choices": {
+                    "a": "About to rush out",
+                    "b": "Traveling on the left (other than on a sidewalk)",
+                    "c": "Crossing diagonally",
+                    "d": "Falling forward"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the orientation of the pedestrian's body?",
+                "choices": {
+                    "a": "Diagonally to the right, in the same direction as the vehicle",
+                    "b": "Perpendicular to the vehicle and to the right",
+                    "c": "Same direction as the vehicle",
+                    "d": "Diagonally to the left, in the same direction as the vehicle"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the position of the pedestrian relative to the vehicle?",
+                "choices": {
+                    "a": "Diagonally to the left in front of the vehicle",
+                    "b": "Directly in front of the vehicle",
+                    "c": "Behind the vehicle",
+                    "d": "Diagonally to the right, in front of the vehicle"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is relative distance of pedestrian from vehicle?",
+                "choices": {
+                    "a": "Very far",
+                    "b": "Close",
+                    "c": "Near",
+                    "d": "Far"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's direction of travel?",
+                "choices": {
+                    "a": "Diagonally backward and to the left",
+                    "b": "Backward",
+                    "c": "In front",
+                    "d": "Diagonally backward and to the right"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's action?",
+                "choices": {
+                    "a": "About to squat",
+                    "b": "Standing still",
+                    "c": "About to stand still",
+                    "d": "Going straight ahead"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the orientation of the pedestrian's body?",
+                "choices": {
+                    "a": "Opposite direction to the vehicle",
+                    "b": "Same direction as the vehicle",
+                    "c": "Diagonally to the left, in the same direction as the vehicle",
+                    "d": "Diagonally to the right, in the same direction as the vehicle"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the position of the pedestrian relative to the vehicle?",
+                "choices": {
+                    "a": "On the left of the vehicle",
+                    "b": "Directly in front of the vehicle",
+                    "c": "Diagonally to the left in front of the vehicle",
+                    "d": "Behind the vehicle"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is relative distance of pedestrian from vehicle?",
+                "choices": {
+                    "a": "Near",
+                    "b": "Far",
+                    "c": "Close",
+                    "d": "Very far"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's direction of travel?",
+                "choices": {
+                    "a": "In front",
+                    "b": "Diagonally to the front and to the left",
+                    "c": "Diagonally backward and to the right",
+                    "d": "Backward"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "overhead",
+                "question": "What is the pedestrian's action?",
+                "choices": {
+                    "a": "Standing still",
+                    "b": "About to stand still",
+                    "c": "Crossing",
+                    "d": "Squatting"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "scenario": "20230707_8_SN46_T1",
+        "perspective": "vehicle_view",
+        "results": [
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the position of the vehicle relative to the pedestrian?",
+                "choices": {
+                    "a": "In front of the pedestrian",
+                    "b": "Behind the pedestrian",
+                    "c": "Diagonally to the left in front of the pedestrian",
+                    "d": "Behind to the right of the pedestrian"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is relative distance of vehicle from pedestrian?",
+                "choices": {
+                    "a": "Close",
+                    "b": "near",
+                    "c": "far"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is vehicle's field of view?",
+                "choices": {
+                    "a": "Pedestrian is not visible",
+                    "b": "Pedestrian is visible"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the action taken by vehicle?",
+                "choices": {
+                    "a": "Overtaking",
+                    "b": "Collided with the pedestrian",
+                    "c": "Passing",
+                    "d": "Avoided by emergency braking"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the position of the vehicle relative to the pedestrian?",
+                "choices": {
+                    "a": "Behind to the left of the pedestrian",
+                    "b": "Left side of the pedestrian",
+                    "c": "Right side of the pedestrian",
+                    "d": "In front of the pedestrian"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is relative distance of vehicle from pedestrian?",
+                "choices": {
+                    "a": "Close",
+                    "b": "far",
+                    "c": "near"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is vehicle's field of view?",
+                "choices": {
+                    "a": "Pedestrian is not visible",
+                    "b": "Pedestrian is visible"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the action taken by vehicle?",
+                "choices": {
+                    "a": "Swerved to the left to avoid",
+                    "b": "About to overtake",
+                    "c": "Finished passing",
+                    "d": "Going straight ahead"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the position of the vehicle relative to the pedestrian?",
+                "choices": {
+                    "a": "Right side of the pedestrian",
+                    "b": "Behind to the right of the pedestrian",
+                    "c": "Diagonally to the right in front of the pedestrian",
+                    "d": "Behind the pedestrian"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is relative distance of vehicle from pedestrian?",
+                "choices": {
+                    "a": "Near",
+                    "b": "close",
+                    "c": "far"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is vehicle's field of view?",
+                "choices": {
+                    "a": "Pedestrian is visible",
+                    "b": "Pedestrian is not visible"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the action taken by vehicle?",
+                "choices": {
+                    "a": "Swerving to the left to avoid",
+                    "b": "Swerving to the right to avoid",
+                    "c": "Going straight ahead",
+                    "d": "Finished passing"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the position of the vehicle relative to the pedestrian?",
+                "choices": {
+                    "a": "Behind to the right of the pedestrian",
+                    "b": "Left side of the pedestrian",
+                    "c": "Behind the pedestrian",
+                    "d": "In front of the pedestrian"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is relative distance of vehicle from pedestrian?",
+                "choices": {
+                    "a": "far",
+                    "b": "Near",
+                    "c": "close"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is vehicle's field of view?",
+                "choices": {
+                    "a": "Pedestrian is not visible",
+                    "b": "Pedestrian is visible"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the action taken by vehicle?",
+                "choices": {
+                    "a": "About to avoid with emergency braking",
+                    "b": "Going straight ahead",
+                    "c": "Overtaking",
+                    "d": "Finished passing"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the position of the vehicle relative to the pedestrian?",
+                "choices": {
+                    "a": "Diagonally to the right in front of the pedestrian",
+                    "b": "Behind to the right of the pedestrian",
+                    "c": "In front of the pedestrian",
+                    "d": "Right side of the pedestrian"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is relative distance of vehicle from pedestrian?",
+                "choices": {
+                    "a": "near",
+                    "b": "close",
+                    "c": "Far"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is vehicle's field of view?",
+                "choices": {
+                    "a": "Pedestrian is not visible",
+                    "b": "Pedestrian is visible"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "vehicle_view",
+                "question": "What is the action taken by vehicle?",
+                "choices": {
+                    "a": "Going straight ahead",
+                    "b": "Collided with the pedestrian",
+                    "c": "Finished overtaking",
+                    "d": "Swerved to the right to avoid"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "scenario": "20230707_8_SN46_T1",
+        "perspective": "environment",
+        "results": [
+            {
+                "perspective": "environment",
+                "question": "What is the age group of the pedestrian?",
+                "choices": {
+                    "a": "0-9 years old",
+                    "b": "70s",
+                    "c": "50s",
+                    "d": "30s"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What is the height of the pedestrian?",
+                "choices": {
+                    "a": "170 cm",
+                    "b": "150 cm",
+                    "c": "130 cm",
+                    "d": "180 cm"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "environment",
+                "question": "What pedestrian is wearing on upper body?",
+                "choices": {
+                    "a": "Coat",
+                    "b": "Jacket",
+                    "c": "T-shirt",
+                    "d": "White shirt"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What is the color of pedestrian's upper body clothing?",
+                "choices": {
+                    "a": "Turquoise",
+                    "b": "Yellow",
+                    "c": "Red",
+                    "d": "Brown"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What pedestrian is wearing on lower body?",
+                "choices": {
+                    "a": "Skirt",
+                    "b": "Short pants",
+                    "c": "Slacks"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What is the color of pedestrian's lower body clothing?",
+                "choices": {
+                    "a": "Red",
+                    "b": "Black",
+                    "c": "Blue",
+                    "d": "Navy blue"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What is weather in the scenario?",
+                "choices": {
+                    "a": "Clear",
+                    "b": "Light rain",
+                    "c": "Snow",
+                    "d": "Blizzard"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "environment",
+                "question": "What is the brightness level in the scene?",
+                "choices": {
+                    "a": "Dim",
+                    "b": "Dark",
+                    "c": "Bright"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What are road surface conditions?",
+                "choices": {
+                    "a": "Wet",
+                    "b": "Dry",
+                    "c": "Frozen"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What is the road inclination in the scene?",
+                "choices": {
+                    "a": "Steep downhill",
+                    "b": "Level",
+                    "c": "Gentle downhill",
+                    "d": "Steep uphill"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What is surface type of the road?",
+                "choices": {
+                    "a": "Asphalt",
+                    "b": "Gravel",
+                    "c": "Dirt"
+                },
+                "correct": "a",
+                "model_answer": "a",
+                "is_correct": true
+            },
+            {
+                "perspective": "environment",
+                "question": "What is the volume of the traffic in the scene?",
+                "choices": {
+                    "a": "Light",
+                    "b": "Usual",
+                    "c": "Heavy"
+                },
+                "correct": "b",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "What is the type of the road?",
+                "choices": {
+                    "a": "Expressway",
+                    "b": "Main road",
+                    "c": "Parking lot / on site",
+                    "d": "Residential road"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "How many lanes are there?",
+                "choices": {
+                    "a": "One way, two lanes",
+                    "b": "One way, one lane",
+                    "c": "Two-way traffic",
+                    "d": "One way, three lanes"
+                },
+                "correct": "c",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "Where is the sidewalk in the scene?",
+                "choices": {
+                    "a": "Only on the left",
+                    "b": "Only on the right",
+                    "c": "Both sides",
+                    "d": "Not both sides"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            },
+            {
+                "perspective": "environment",
+                "question": "Where is the roadside strip in the scene?",
+                "choices": {
+                    "a": "Only on the right",
+                    "b": "Both sides",
+                    "c": "Only on the left",
+                    "d": "Not both sides"
+                },
+                "correct": "d",
+                "model_answer": "a",
+                "is_correct": false
+            }
+        ]
+    }
+]

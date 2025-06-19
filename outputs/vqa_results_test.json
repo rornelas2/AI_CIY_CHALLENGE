@@ -1,0 +1,307 @@
+[
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the position of the vehicle relative to the pedestrian?",
+        "choices": {
+            "a": "In front of the pedestrian",
+            "b": "Behind the pedestrian",
+            "c": "Diagonally to the left in front of the pedestrian",
+            "d": "Behind to the right of the pedestrian"
+        },
+        "correct": "c",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is relative distance of vehicle from pedestrian?",
+        "choices": {
+            "a": "Close",
+            "b": "near",
+            "c": "far"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is vehicle's field of view?",
+        "choices": {
+            "a": "Pedestrian is not visible",
+            "b": "Pedestrian is visible"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the action taken by vehicle?",
+        "choices": {
+            "a": "Overtaking",
+            "b": "Collided with the pedestrian",
+            "c": "Passing",
+            "d": "Avoided by emergency braking"
+        },
+        "correct": "b",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the position of the vehicle relative to the pedestrian?",
+        "choices": {
+            "a": "Behind to the left of the pedestrian",
+            "b": "Left side of the pedestrian",
+            "c": "Right side of the pedestrian",
+            "d": "In front of the pedestrian"
+        },
+        "correct": "b",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is relative distance of vehicle from pedestrian?",
+        "choices": {
+            "a": "Close",
+            "b": "far",
+            "c": "near"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is vehicle's field of view?",
+        "choices": {
+            "a": "Pedestrian is not visible",
+            "b": "Pedestrian is visible"
+        },
+        "correct": "b",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the action taken by vehicle?",
+        "choices": {
+            "a": "Swerved to the left to avoid",
+            "b": "About to overtake",
+            "c": "Finished passing",
+            "d": "Going straight ahead"
+        },
+        "correct": "d",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the position of the vehicle relative to the pedestrian?",
+        "choices": {
+            "a": "Right side of the pedestrian",
+            "b": "Behind to the right of the pedestrian",
+            "c": "Diagonally to the right in front of the pedestrian",
+            "d": "Behind the pedestrian"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is relative distance of vehicle from pedestrian?",
+        "choices": {
+            "a": "Near",
+            "b": "close",
+            "c": "far"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is vehicle's field of view?",
+        "choices": {
+            "a": "Pedestrian is visible",
+            "b": "Pedestrian is not visible"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the action taken by vehicle?",
+        "choices": {
+            "a": "Swerving to the left to avoid",
+            "b": "Swerving to the right to avoid",
+            "c": "Going straight ahead",
+            "d": "Finished passing"
+        },
+        "correct": "c",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the position of the vehicle relative to the pedestrian?",
+        "choices": {
+            "a": "Behind to the right of the pedestrian",
+            "b": "Left side of the pedestrian",
+            "c": "Behind the pedestrian",
+            "d": "In front of the pedestrian"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is relative distance of vehicle from pedestrian?",
+        "choices": {
+            "a": "far",
+            "b": "Near",
+            "c": "close"
+        },
+        "correct": "b",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is vehicle's field of view?",
+        "choices": {
+            "a": "Pedestrian is not visible",
+            "b": "Pedestrian is visible"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the action taken by vehicle?",
+        "choices": {
+            "a": "About to avoid with emergency braking",
+            "b": "Going straight ahead",
+            "c": "Overtaking",
+            "d": "Finished passing"
+        },
+        "correct": "b",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the position of the vehicle relative to the pedestrian?",
+        "choices": {
+            "a": "Diagonally to the right in front of the pedestrian",
+            "b": "Behind to the right of the pedestrian",
+            "c": "In front of the pedestrian",
+            "d": "Right side of the pedestrian"
+        },
+        "correct": "b",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is relative distance of vehicle from pedestrian?",
+        "choices": {
+            "a": "near",
+            "b": "close",
+            "c": "Far"
+        },
+        "correct": "c",
+        "model_answer": "a",
+        "is_correct": false,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is vehicle's field of view?",
+        "choices": {
+            "a": "Pedestrian is not visible",
+            "b": "Pedestrian is visible"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    },
+    {
+        "perspective": "vehicle_view",
+        "question": "What is the action taken by vehicle?",
+        "choices": {
+            "a": "Going straight ahead",
+            "b": "Collided with the pedestrian",
+            "c": "Finished overtaking",
+            "d": "Swerved to the right to avoid"
+        },
+        "correct": "a",
+        "model_answer": "a",
+        "is_correct": true,
+        "video_paths": [
+            "data/videos/train/20230707_8_SN46_T1/vehicle_view/20230707_8_SN46_T1_vehicle_view.mp4"
+        ]
+    }
+]
