@@ -1,0 +1,27 @@
+!/bin/bash  
+SBATCH --mail-user=rornelas5@ucmerced.edu # REPLACE WITH YOUR EMAIL
+SBATCH --mail-type=ALL  
+SBATCH -p test
+SBATCH -t 1:00:00
+SBATCH --ntasks-per-node=56
+SBATCH --output=../logs/runModel_%j.stdout 
+SBATCH --job-name=runModel
+SBATCH --export=ALL
+SBATCH --gres=gpu:1
+
+whoami
+
+module load anaconda3
+
+source ../avaEnvNew/bin/activate # YOUR OWN VENV
+
+module load ffmpeg
+module load gcc/9.3.0
+
+
+# uncomment for the right requirements
+
+pip install flash_attn --no-build-isolation
+pip install transformers==4.46.3 accelerate==1.0.1
+pip install decord ffmpeg-python imageio opencv-python
+pip install torch 
