@@ -3,15 +3,11 @@ import json
 from pathlib import Path
 from tqdm import tqdm
 
-# Paths - adjust these as needed
-VQA_ROOT = Path("data/annotations/vqa/val")
-BBOX_ROOT = Path("data/bbox_global/val")
-BEST_CAMERA_PATH = Path("processed_anno/best_view_for_scenario.json")
-OUTPUT_PATH = Path("vqa_spaceom_val.json")
-
-# Load best camera mapping once
-with open(BEST_CAMERA_PATH, "r") as f:
-    best_views = json.load(f)
+# Config - adjust paths as needed
+VQA_ROOT = Path("data/annotations/vqa/val")       # Your VQA JSON annotation root
+BBOX_ROOT = Path("data/bbox_global/val")          # Root where images are stored
+OUTPUT_JSON = Path("vqa_spaceom_val_multiframe.json")
+MAX_FRAMES = 10
 
 label_map = {
     "avoidance": "avoidance",
@@ -19,282 +15,220 @@ label_map = {
     "judgement": "judgement",
     "recognition": "recognition",
     "prerecognition": "prerecognition",
-    "4": "4",  # default fallback
+    "4": "4",  # fallback label
 }
 
-def build_environment_samples(scenario_id, json_data, best_views, bbox_root):
-    samples = []
-    image_path = ""
+def load_json(path: Path):
+    if path.exists():
+        with open(path, "r") as f:
+            return json.load(f)
+    return None
 
-   
-        
-    overhead_cameras_path = bbox_root / scenario_id / "overhead_view"
-    image_path = None
-    if overhead_cameras_path.exists():
-        for cam_folder in overhead_cameras_path.iterdir():
-            candidate_image = cam_folder / "00001.jpg"
-            image_path = str(candidate_image)
-        
+def make_content(img_paths, question, choices):
+    """
+    Build content list: multiple images + question text
+    """
+    content = [{"type": "image", "image": str(p.relative_to(BBOX_ROOT))} for p in img_paths]
+    question_full = question + "\n" + "\n".join(f"{k}: {v}" for k, v in choices.items())
+    content.append({"type": "text", "text": question_full})
+    return content
 
-    camera_folder = bbox_root / scenario_id / "overhead_view"
-    print(f"Looking in folder: {camera_folder}")
-    print(f"Folder exists? {camera_folder.exists()}")
-    if camera_folder.exists():
-        img_files = sorted([f for f in camera_folder.iterdir() if f.suffix.lower() in ['.jpg', '.png']])
-        print(f"Found {len(img_files)} images:")
-        for img in img_files:
-            print(img)
-        if img_files:
-            image_path = str(img_files[0])  # use first image
+def collect_imgs(folder: Path, segment: str):
+    """
+    Collect up to MAX_FRAMES images from `folder` whose filenames include `segment` (case-insensitive).
+    If none found, fallback to first MAX_FRAMES images in the folder.
+    """
+    if not folder or not folder.exists():
+        return []
 
-    for item in json_data:
-        questions = item.get("environment", [])
-        for q in questions:
-            question_text = q.get("question", "")
-            choices = {k: q[k] for k in ['a', 'b', 'c', 'd'] if k in q}
-            correct_letter = q.get("correct", "Unknown")
-            sample = {
-                "id": scenario_id,
+    segment_lower = segment.lower()
+    imgs = sorted([
+        f for f in folder.iterdir()
+        if f.is_file() and f.suffix.lower() == ".jpg" and segment_lower in f.name.lower()
+    ])
+    if not imgs:
+        # fallback: any images in folder
+        imgs = sorted([f for f in folder.iterdir() if f.is_file() and f.suffix.lower() == ".jpg"])
+    return imgs[:MAX_FRAMES]
+
+def build_env(sid, env_data):
+    out = []
+    env_folder = BBOX_ROOT / sid / "environment"
+
+    if not env_folder.exists():
+        ov = BBOX_ROOT / sid / "overhead_view"
+        if ov.exists():
+            env_folder = next((c for c in ov.iterdir() if c.is_dir()), None)
+        else:
+            env_folder = None
+
+    for block in env_data:
+        for q in block.get("environment", []):
+            imgs = []
+            if env_folder:
+                imgs = collect_imgs(env_folder, segment="")  # no segment filtering for env
+
+            if not imgs:
+                # Skip question if no images
+                # print(f"Warning: No images found for scenario {sid} in environment.")
+                continue
+
+            content = make_content(imgs, q["question"], {k: q[k] for k in ('a','b','c','d') if k in q})
+            out.append({
+                "id": sid,
                 "segment": "unknown",
                 "view": "environment",
                 "start_time": "0",
                 "end_time": "0",
                 "conversations": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {"type": "image", "image": image_path},
-                            {
-                                "type": "text",
-                                "text": question_text + "\n" + "\n".join(f"{k}: {v}" for k, v in choices.items())
-                            }
-                        ]
-                    },
-                    {
-                        "role": "assistant",
-                        "content": [
-                            {"type": "text", "text": correct_letter}
-                        ]
-                    }
+                    {"role": "user", "content": content},
+                    {"role": "assistant", "content": [{"type": "text", "text": q.get("correct", "")}]},
                 ],
-                "image": image_path
-            }
-            samples.append(sample)
-    return samples
+                "image": str(imgs[0].relative_to(BBOX_ROOT))
+            })
+    return out
 
-def build_overhead_samples(scenario_id, json_data, bbox_root):
-    samples = []
-    if not json_data or not isinstance(json_data, list):
-        return samples
+def build_overhead(sid, over_data):
+    out = []
+    entry = over_data[0]
+    video_stems = [Path(v).stem for v in entry.get("overhead_videos", [])]
+    cams_root = BBOX_ROOT / sid / "overhead_view"
 
-    event_phases = json_data[0].get("event_phase", [])
-    for phase in event_phases:
+    for phase in entry.get("event_phase", []):
+        seg_raw = phase.get("labels", ["unknown"])[0]
+        segment = label_map.get(seg_raw, seg_raw).lower()
         start_time = phase.get("start_time", "0")
         end_time = phase.get("end_time", "0")
-        labels = phase.get("labels", ["4"])
-        segment_label = labels[0]
-        segment = label_map.get(segment_label, segment_label)
 
-        overhead_cameras_path = bbox_root / scenario_id / "overhead_view"
-        image_path = None
-        if overhead_cameras_path.exists():
-            for cam_folder in overhead_cameras_path.iterdir():
-                candidate_image = cam_folder / f"{segment}.jpg"
-                image_path = str(candidate_image)
-        
+        imgs = []
+        for vs in video_stems:
+            cam_folder = cams_root / vs
+            if not cam_folder.exists():
+                continue
+
+            cand = sorted([
+                p for p in cam_folder.iterdir()
+                if p.is_file() and p.suffix.lower() == ".jpg" and segment in p.name.lower()
+            ])
+            imgs.extend(cand)
+            if len(imgs) >= MAX_FRAMES:
+                break
+
+        imgs = imgs[:MAX_FRAMES]
+
+        # fallback: try any images if none matched segment
+        if not imgs:
+            for vs in video_stems:
+                cam_folder = cams_root / vs
+                if not cam_folder.exists():
+                    continue
+                any_imgs = sorted([p for p in cam_folder.iterdir() if p.is_file() and p.suffix.lower() == ".jpg"])
+                if any_imgs:
+                    imgs = any_imgs[:MAX_FRAMES]
+                    break
+
+        if not imgs:
+            # Skip if no images found
+            # print(f"Warning: No images found for scenario {sid}, segment '{segment}' in overhead_view.")
+            continue
 
         for conv in phase.get("conversations", []):
-            question_text = conv.get("question", "")
-            choices = {k: conv[k] for k in ['a', 'b', 'c', 'd'] if k in conv}
-            correct_letter = conv.get("correct", "Unknown")
-
-            sample = {
-                "id": scenario_id,
+            content = make_content(imgs, conv["question"], {k: conv[k] for k in ("a","b","c","d") if k in conv})
+            out.append({
+                "id": sid,
                 "segment": segment,
                 "view": "overhead",
                 "start_time": start_time,
                 "end_time": end_time,
                 "conversations": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {"type": "image", "image": image_path or ""},
-                            {
-                                "type": "text",
-                                "text": question_text + "\n" + "\n".join(f"{k}: {v}" for k, v in choices.items())
-                            }
-                        ]
-                    },
-                    {
-                        "role": "assistant",
-                        "content": [
-                            {"type": "text", "text": correct_letter}
-                        ]
-                    }
+                    {"role": "user", "content": content},
+                    {"role": "assistant", "content": [{"type": "text", "text": conv.get("correct", "")}]}
                 ],
-                "image": image_path or ""
-            }
-            samples.append(sample)
-    return samples
+                "image": str(imgs[0].relative_to(BBOX_ROOT))
+            })
+    return out
 
-def build_vehicle_samples(scenario_id, json_data, bbox_root):
-    samples = []
-    if not json_data or not isinstance(json_data, list):
-        return samples
+def build_vehicle(sid, veh_data, bbox_root):
+    out = []
+    entry = veh_data[0]
+    event_phases = entry.get("event_phase", [])
+    vehicle_cameras_path = bbox_root / sid / "vehicle_view"
 
-    video_filename = json_data[0].get("vehicle_view", "")
-    event_phases = json_data[0].get("event_phase", [])
-    vehicle_cameras_path = bbox_root / scenario_id / "vehicle_view"
+    # Attempt to find the nested folder for vehicle images
+    nested_folder = None
+    if vehicle_cameras_path.exists():
+        # Sometimes nested folders named like <sid>_vehicle_view
+        possible_nested = vehicle_cameras_path / f"{sid}_vehicle_view"
+        if possible_nested.exists():
+            nested_folder = possible_nested
+        else:
+            # fallback to first directory inside vehicle_view
+            nested_folder = next((c for c in vehicle_cameras_path.iterdir() if c.is_dir()), None)
 
     for phase in event_phases:
+        seg_raw = phase.get("labels", ["unknown"])[0]
+        segment = label_map.get(seg_raw, seg_raw).lower()
         start_time = phase.get("start_time", "0")
         end_time = phase.get("end_time", "0")
-        labels = phase.get("labels", ["4"])
-        segment_label = labels[0]
-        segment = label_map.get(segment_label, segment_label)
 
-        image_path = None
-        if vehicle_cameras_path.exists() and video_filename:
-            candidate_image = vehicle_cameras_path / f"{segment}.jpg"
-            image_path = str(candidate_image)
+        imgs = []
+        # First try nested folder
+        if nested_folder:
+            imgs = collect_imgs(nested_folder, segment)
+        # fallback to vehicle_view root folder
+        if not imgs:
+            imgs = collect_imgs(vehicle_cameras_path, segment)
+
+        # DEBUG: print how many images found
+        # print(f"Vehicle view images found for {sid} segment '{segment}': {len(imgs)}")
+
+        if not imgs:
+            # Skip if no images found
+            # print(f"Warning: No images found for scenario {sid}, segment '{segment}' in vehicle_view.")
+            continue
 
         for conv in phase.get("conversations", []):
-            question_text = conv.get("question", "")
-            choices = {k: conv[k] for k in ['a', 'b', 'c', 'd'] if k in conv}
-            correct_letter = conv.get("correct", "Unknown")
-
-            sample = {
-                "id": scenario_id,
+            content = make_content(imgs, conv["question"], {k: conv[k] for k in ("a","b","c","d") if k in conv})
+            out.append({
+                "id": sid,
                 "segment": segment,
                 "view": "vehicle",
                 "start_time": start_time,
                 "end_time": end_time,
                 "conversations": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {"type": "image", "image": image_path or ""},
-                            {
-                                "type": "text",
-                                "text": question_text + "\n" + "\n".join(f"{k}: {v}" for k, v in choices.items())
-                            }
-                        ]
-                    },
-                    {
-                        "role": "assistant",
-                        "content": [
-                            {"type": "text", "text": correct_letter}
-                        ]
-                    }
+                    {"role": "user", "content": content},
+                    {"role": "assistant", "content": [{"type": "text", "text": conv.get("correct", "")}]}
                 ],
-                "image": image_path or ""
-            }
-            samples.append(sample)
-    return samples
+                "image": str(imgs[0].relative_to(BBOX_ROOT))
+            })
+    return out
+
+
+
+def process_scenario(folder: Path, sid: str, sink: list):
+    env = load_json(folder / "environment" / f"{sid}.json")
+    over = load_json(folder / "overhead_view" / f"{sid}.json")
+    veh = load_json(folder / "vehicle_view" / f"{sid}.json")
+
+    if env:
+        sink.extend(build_env(sid, env))
+    if over:
+        sink.extend(build_overhead(sid, over))
+    if veh:
+        sink.extend(build_vehicle(sid, veh, BBOX_ROOT))
 
 def main():
-    train_samples = []
+    all_samples = []
 
-    for scenario_folder in tqdm(sorted(os.listdir(VQA_ROOT))):
-        scenario_path = VQA_ROOT / scenario_folder
-        if not scenario_path.is_dir():
-            continue
+    for scen in tqdm(sorted(os.listdir(VQA_ROOT))):
+        scen_path = VQA_ROOT / scen
+        if scen_path.is_dir():
+            process_scenario(scen_path, scen, all_samples)
 
-        # Handle normal_trimmed differently since folder structure is nested
-        if scenario_folder == "normal_trimmed":
-            # Iterate subfolders inside normal_trimmed
-            for subfolder in sorted(scenario_path.iterdir()):
-                if not subfolder.is_dir():
-                    continue
-                subfolder_name = subfolder.name
-                env_json_path = subfolder / "environment" / f"{subfolder_name}.json"
-                overhead_json_path = subfolder / "overhead_view" / f"{subfolder_name}.json"
-                vehicle_json_path = subfolder / "vehicle_view" / f"{subfolder_name}.json"
+    print(f"Total samples created: {len(all_samples)}")
 
-                env_data = overhead_data = vehicle_data = None
-
-                if env_json_path.exists():
-                    with open(env_json_path, "r") as f:
-                        env_data = json.load(f)
-
-                if overhead_json_path.exists():
-                    with open(overhead_json_path, "r") as f:
-                        overhead_data = json.load(f)
-
-                if vehicle_json_path.exists():
-                    with open(vehicle_json_path, "r") as f:
-                        vehicle_data = json.load(f)
-
-                print(f"Processing scenario: {subfolder_name}")
-
-                if env_data:
-                    print(f"  Environment view, questions: {sum(len(item.get('environment', [])) for item in env_data)}")
-                    env_samples = build_environment_samples(subfolder_name, env_data, best_views, BBOX_ROOT)
-                    train_samples.extend(env_samples)
-                else:
-                    print("  Skipping environment - JSON missing")
-
-                if overhead_data:
-                    print(f"  Overhead view, event phases: {len(overhead_data[0].get('event_phase', []))}")
-                    overhead_samples = build_overhead_samples(subfolder_name, overhead_data, BBOX_ROOT)
-                    train_samples.extend(overhead_samples)
-                else:
-                    print("  Skipping overhead_view - JSON missing")
-
-                if vehicle_data:
-                    print(f"  Vehicle view, event phases: {len(vehicle_data[0].get('event_phase', []))}")
-                    vehicle_samples = build_vehicle_samples(subfolder_name, vehicle_data, BBOX_ROOT)
-                    train_samples.extend(vehicle_samples)
-                else:
-                    print("  Skipping vehicle_view - JSON missing")
-
-        else:
-            # Regular scenario folder
-            env_json_path = scenario_path / "environment" / f"{scenario_folder}.json"
-            overhead_json_path = scenario_path / "overhead_view" / f"{scenario_folder}.json"
-            vehicle_json_path = scenario_path / "vehicle_view" / f"{scenario_folder}.json"
-
-            env_data = overhead_data = vehicle_data = None
-
-            if env_json_path.exists():
-                with open(env_json_path, "r") as f:
-                    env_data = json.load(f)
-
-            if overhead_json_path.exists():
-                with open(overhead_json_path, "r") as f:
-                    overhead_data = json.load(f)
-
-            if vehicle_json_path.exists():
-                with open(vehicle_json_path, "r") as f:
-                    vehicle_data = json.load(f)
-
-            print(f"Processing scenario: {scenario_folder}")
-
-            if env_data:
-                print(f"  Environment view, questions: {sum(len(item.get('environment', [])) for item in env_data)}")
-                env_samples = build_environment_samples(scenario_folder, env_data, best_views, BBOX_ROOT)
-                train_samples.extend(env_samples)
-            else:
-                print("  Skipping environment - JSON missing")
-
-            if overhead_data:
-                print(f"  Overhead view, event phases: {len(overhead_data[0].get('event_phase', []))}")
-                overhead_samples = build_overhead_samples(scenario_folder, overhead_data, BBOX_ROOT)
-                train_samples.extend(overhead_samples)
-            else:
-                print("  Skipping overhead_view - JSON missing")
-
-            if vehicle_data:
-                print(f"  Vehicle view, event phases: {len(vehicle_data[0].get('event_phase', []))}")
-                vehicle_samples = build_vehicle_samples(scenario_folder, vehicle_data, BBOX_ROOT)
-                train_samples.extend(vehicle_samples)
-            else:
-                print("  Skipping vehicle_view - JSON missing")
-
-    print(f"Converted {len(train_samples)} VQA samples.")
-
-    with open(OUTPUT_PATH, "w") as out_f:
-        json.dump(train_samples, out_f, indent=2)
+    with open(OUTPUT_JSON, "w") as f_out:
+        json.dump(all_samples, f_out, indent=2)
 
 if __name__ == "__main__":
     main()
